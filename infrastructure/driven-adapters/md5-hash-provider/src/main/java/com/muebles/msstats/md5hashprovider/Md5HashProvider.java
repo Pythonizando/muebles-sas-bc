@@ -1,6 +1,9 @@
 package com.muebles.msstats.md5hashprovider;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
+import org.springframework.stereotype.Component;
+
 import com.muebles.msstats.model.stats.gateways.HashProvider;
 
 @Component

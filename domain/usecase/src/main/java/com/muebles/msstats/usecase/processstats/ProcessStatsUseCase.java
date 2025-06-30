@@ -1,6 +1,13 @@
 package com.muebles.msstats.usecase.processstats;
 
 import lombok.RequiredArgsConstructor;
+import reactor.core.publisher.Mono;
+import com.muebles.msstats.model.stats.Stats;
+import com.muebles.msstats.model.stats.gateways.HashProvider;
+import com.muebles.msstats.model.stats.gateways.StatsPublisher;
+import com.muebles.msstats.model.stats.gateways.StatsRepository;
+
+
 @RequiredArgsConstructor
 public class ProcessStatsUseCase {
     StatsRepository repository;

@@ -4,14 +4,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
+
+import com.muebles.msstats.model.stats.Stats;
+import com.muebles.msstats.usecase.processstats.ProcessStatsUseCase;
+
 import reactor.core.publisher.Mono;
 
 @Component
 @RequiredArgsConstructor
 public class Handler {
     private final ProcessStatsUseCase processStatsUseCase;
-//private  final UseCase useCase;
-//private  final UseCase2 useCase2;
 
     public Mono<ServerResponse> handleStats(ServerRequest request) {
         return request.bodyToMono(Stats.class)
