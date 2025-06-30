@@ -1,6 +1,8 @@
 apply plugin: 'org.springframework.boot'
 
 dependencies {
+	implementation project(':rabbitmq-config')
+	implementation project(':dynamodb-config')
 	implementation project(':rabbitmq')
 	implementation project(':dynamodb')
 	implementation 'org.reactivecommons.utils:object-mapper:0.1.0'

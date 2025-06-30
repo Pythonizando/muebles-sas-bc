@@ -11,6 +11,11 @@ spring:
       path: "/h2"
   profiles:
     include: null
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 management:
   endpoints:
     web:
@@ -25,3 +30,4 @@ cors:
 aws:
   dynamodb:
     endpoint: "http://localhost:8000"
+    region: "us-east-1"

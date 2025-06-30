@@ -36,7 +36,8 @@ public class DynamoDBStatsRepository implements StatsRepository {
             "motivoDuda", AttributeValue.builder().n(String.valueOf(stats.getMotivoDuda())).build(),
             "motivoCompra", AttributeValue.builder().n(String.valueOf(stats.getMotivoCompra())).build(),
             "motivoFelicitaciones", AttributeValue.builder().n(String.valueOf(stats.getMotivoFelicitaciones())).build(),
-            "motivoCambio", AttributeValue.builder().n(String.valueOf(stats.getMotivoCambio())).build()
+            "motivoCambio", AttributeValue.builder().n(String.valueOf(stats.getMotivoCambio())).build(),
+            "hash", AttributeValue.builder().s(stats.getHash()).build()
         );
 
         return Mono.fromFuture(() ->

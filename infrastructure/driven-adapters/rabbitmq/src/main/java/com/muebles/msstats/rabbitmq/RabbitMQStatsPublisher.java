@@ -16,7 +16,7 @@ public class RabbitMQStatsPublisher implements StatsPublisher{
 
     @Override
     public Mono<Void> publishStats(Stats stats) {
-        rabbitTemplate.convertAndSend("events.stats.validated", stats);
+        rabbitTemplate.convertAndSend("event.stats.validated", stats);
         return Mono.empty();
     }
     

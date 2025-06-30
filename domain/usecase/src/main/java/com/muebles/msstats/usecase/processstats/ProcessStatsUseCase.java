@@ -2,17 +2,17 @@ package com.muebles.msstats.usecase.processstats;
 
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
+
 import com.muebles.msstats.model.stats.Stats;
 import com.muebles.msstats.model.stats.gateways.HashProvider;
 import com.muebles.msstats.model.stats.gateways.StatsPublisher;
 import com.muebles.msstats.model.stats.gateways.StatsRepository;
 
-
 @RequiredArgsConstructor
 public class ProcessStatsUseCase {
-    StatsRepository repository;
-    StatsPublisher publisher;
-    HashProvider hashProvider;
+    private final StatsRepository repository;
+    private final StatsPublisher publisher;
+    private final HashProvider hashProvider;
 
     public Mono<Void> processStats(Stats stats) {
         String input = String.format("%d,%d,%d,%d,%d,%d,%d",
