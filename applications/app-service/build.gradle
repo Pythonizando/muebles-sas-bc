@@ -4,7 +4,6 @@ dependencies {
 	implementation project(':rabbitmq')
 	implementation project(':dynamodb')
 	implementation 'org.reactivecommons.utils:object-mapper:0.1.0'
-	implementation project(':metrics')
 	implementation 'software.amazon.awssdk:sts'
 	implementation project(':md5-hash-provider')
 	implementation project(':reactive-web')

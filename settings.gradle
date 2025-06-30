@@ -24,8 +24,6 @@ include ':reactive-web'
 project(':reactive-web').projectDir = file('./infrastructure/entry-points/reactive-web')
 include ':md5-hash-provider'
 project(':md5-hash-provider').projectDir = file('./infrastructure/driven-adapters/md5-hash-provider')
-include ':metrics'
-project(':metrics').projectDir = file('./infrastructure/helpers/metrics')
 include ':dynamodb'
 project(':dynamodb').projectDir = file('./infrastructure/driven-adapters/dynamodb')
 include ':rabbitmq'
