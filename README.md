@@ -4,7 +4,7 @@
 
 Podemos generar hashes md5 de prueba con [MD5 TOOL](https://emn178.github.io/online-tools/md5.html)
 
-Es necesario contar con la version 21 de java, ya tener docker y docker compose instalados
+Es necesario contar con la version 21 de java, y tener docker y docker compose previamente instalados
 
 También es necesario settear las variables de entorno AWS_ACCESS_KEY_ID y AWS_SECRET_ACCESS_KEY, para este ejemplo:
 
