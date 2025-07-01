@@ -335,5 +335,8 @@ gradle-app.setting
 *.hprof
 build-cache
 
+# inicio
+init.md
+
 # Setup DynamoDbLocal
 setup-dynamodb.sh

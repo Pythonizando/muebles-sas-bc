@@ -2,7 +2,7 @@ server:
   port: 8080
 spring:
   application:
-    name: "muebles-msstats"
+    name: "muebles-stats-ms"
   devtools:
     add-properties: false
   h2:
