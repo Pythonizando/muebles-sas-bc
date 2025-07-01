@@ -67,3 +67,9 @@ curl -X POST http://localhost:8080/stats \
   }'
 ```
 Ambos son validos, si quieremos probar una bad Request podemos hacerlo cambiando el hash.
+
+### Las pruebas se ejecutan con:
+
+```
+./gradlew test jacocoTestReport
+```
