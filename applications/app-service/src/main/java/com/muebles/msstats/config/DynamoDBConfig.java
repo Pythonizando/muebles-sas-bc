@@ -1,4 +1,4 @@
-package com.muebles.msstats.dynamodbconfig;
+package com.muebles.msstats.config;
 
 import software.amazon.awssdk.services.dynamodb.DynamoDbAsyncClient;
 import software.amazon.awssdk.regions.Region;

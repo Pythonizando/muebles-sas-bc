@@ -1,4 +1,4 @@
-package com.muebles.msstats.rabbitmqconfig;
+package com.muebles.msstats.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

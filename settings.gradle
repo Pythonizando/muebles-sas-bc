@@ -28,7 +28,3 @@ include ':dynamodb'
 project(':dynamodb').projectDir = file('./infrastructure/driven-adapters/dynamodb')
 include ':rabbitmq'
 project(':rabbitmq').projectDir = file('./infrastructure/driven-adapters/rabbitmq')
-include ':dynamodb-config'
-project(':dynamodb-config').projectDir = file('./infrastructure/helpers/dynamodb-config')
-include ':rabbitmq-config'
-project(':rabbitmq-config').projectDir = file('./infrastructure/helpers/rabbitmq-config')
