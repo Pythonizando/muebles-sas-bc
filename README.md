@@ -73,3 +73,7 @@ Ambos son validos, si quieremos probar una bad Request podemos hacerlo cambiando
 ```
 ./gradlew test jacocoTestReport
 ```
+O para mejor visualización:
+```
+./gradlew test jacocoMergedReport
+```
