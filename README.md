@@ -1,47 +1,69 @@
-# Proyecto Base Implementando Clean Architecture
+# Intrucciones para correr el proyecto
 
 ## Antes de Iniciar
 
-Empezaremos por explicar los diferentes componentes del proyectos y partiremos de los componentes externos, continuando con los componentes core de negocio (dominio) y por último el inicio y configuración de la aplicación.
+Podemos generar hashes md5 de prueba con [MD5 TOOL](https://emn178.github.io/online-tools/md5.html)
 
-Lee el artículo [Clean Architecture — Aislando los detalles](https://medium.com/bancolombia-tech/clean-architecture-aislando-los-detalles-4f9530f35d7a)
+Es necesario contar con la version 21 de java, ya tener docker y docker compose instalados
 
-# Arquitectura
+También es necesario settear las variables de entorno AWS_ACCESS_KEY_ID y AWS_SECRET_ACCESS_KEY, para este ejemplo:
 
-![Clean Architecture](https://miro.medium.com/max/1400/1*ZdlHz8B0-qu9Y-QO3AXR_w.png)
+```
+export AWS_ACCESS_KEY_ID=fake
+export AWS_SECRET_ACCESS_KEY=fake
+```
+### Iniciar RabbitMQ y DynamoDB
+```
+docker-compose up -d
+```
+### Preparar Dynamo
 
-## Domain
+Si es la primera vez que levantamos el contenedor usamos: 
 
-Es el módulo más interno de la arquitectura, pertenece a la capa del dominio y encapsula la lógica y reglas del negocio mediante modelos y entidades del dominio.
+```
+aws dynamodb create-table \
+  --table-name Stats \
+  --attribute-definitions AttributeName=timestamp,AttributeType=S \
+  --key-schema AttributeName=timestamp,KeyType=HASH \
+  --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 \
+  --endpoint-url http://localhost:8000 \
+  --region us-east-1
+```
+### Iniciar microservicio
 
-## Usecases
+Una vez hecho lo anterior podemos levantar el servicio desde la carpeta donde clonamos el repositorio usando:
 
-Este módulo gradle perteneciente a la capa del dominio, implementa los casos de uso del sistema, define lógica de aplicación y reacciona a las invocaciones desde el módulo de entry points, orquestando los flujos hacia el módulo de entities.
+```
+./gradlew bootRun
+```
+### Probar Endpoint
 
-## Infrastructure
-
-### Helpers
-
-En el apartado de helpers tendremos utilidades generales para los Driven Adapters y Entry Points.
-
-Estas utilidades no están arraigadas a objetos concretos, se realiza el uso de generics para modelar comportamientos
-genéricos de los diferentes objetos de persistencia que puedan existir, este tipo de implementaciones se realizan
-basadas en el patrón de diseño [Unit of Work y Repository](https://medium.com/@krzychukosobudzki/repository-design-pattern-bc490b256006)
-
-Estas clases no puede existir solas y debe heredarse su compartimiento en los **Driven Adapters**
-
-### Driven Adapters
-
-Los driven adapter representan implementaciones externas a nuestro sistema, como lo son conexiones a servicios rest,
-soap, bases de datos, lectura de archivos planos, y en concreto cualquier origen y fuente de datos con la que debamos
-interactuar.
-
-### Entry Points
-
-Los entry points representan los puntos de entrada de la aplicación o el inicio de los flujos de negocio.
-
-## Application
-
-Este módulo es el más externo de la arquitectura, es el encargado de ensamblar los distintos módulos, resolver las dependencias y crear los beans de los casos de use (UseCases) de forma automática, inyectando en éstos instancias concretas de las dependencias declaradas. Además inicia la aplicación (es el único módulo del proyecto donde encontraremos la función “public static void main(String[] args)”.
-
-**Los beans de los casos de uso se disponibilizan automaticamente gracias a un '@ComponentScan' ubicado en esta capa.**
+Podemos probar la respuesta del endpoint con una petición a http://localhost:8080/stats con el cuerpo:
+```
+'{
+    "totalContactoClientes": 250,
+    "motivoReclamo": 25,
+    "motivoGarantia": 10,
+    "motivoDuda": 100,
+    "motivoCompra": 100,
+    "motivoFelicitaciones": 7,
+    "motivoCambio": 8,
+    "hash": "5484062a4be1ce5645eb414663e14f59"
+}'
+```
+También podemos usar curl directamente:
+```
+curl -X POST http://localhost:8080/stats \
+  -H "Content-Type: application/json" \
+  -d '{
+    "totalContactoClientes": 666,
+    "motivoReclamo": 1,
+    "motivoGarantia": 2,
+    "motivoDuda": 3,
+    "motivoCompra": 4,
+    "motivoFelicitaciones": 5,
+    "motivoCambio": 6,
+    "hash": "d216e744dde50d97c2cb997bed3e3e65"
+  }'
+```
+Ambos son validos, si quieremos probar una bad Request podemos hacerlo cambiando el hash.
